@@ -1,8 +1,17 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import { BrushCleaning, ShieldCheck, Crown, Cctv, Shield } from "lucide-astro";
 
 const services = await getCollection("services");
 type Service = CollectionEntry<"services">;
+
+const iconMap: Record<string, any> = {
+    cleaning: BrushCleaning,
+    cyber: ShieldCheck,
+    vip: Crown,
+    cctv: Cctv,
+    guard: Shield,
+};
 ---
 
 <section id="servicios" class="services">
@@ -20,13 +29,18 @@ type Service = CollectionEntry<"services">;
 
         <div class="grid">
             {
-                services.map((service: Service) => (
-                    <div class="card">
-                        <div class="icon-wrapper">{service.data.icon}</div>
-                        <h3>{service.data.title}</h3>
-                        <p>{service.data.description}</p>
-                    </div>
-                ))
+                services.map((service: Service) => {
+                    const Icon = iconMap[service.data.icon];
+                    return (
+                        <div class="card">
+                            <div class="icon-wrapper">
+                                {Icon ? <Icon /> : service.data.icon}
+                            </div>
+                            <h3>{service.data.title}</h3>
+                            <p>{service.data.description}</p>
+                        </div>
+                    );
+                })
             }
         </div>
     </div>

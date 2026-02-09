@@ -1,13 +1,14 @@
 ---
 const clients = [
-    "TechCorp Global",
-    "Financiera Horizonte",
-    "Grupo Constructor Alpha",
-    "Logística Express",
-    "Centro Médico Vital",
-    "Industrias Apex",
-    "Retail Solutions",
-    "Banca Privada Elite",
+    { name: "TechCorp Global" },
+    { name: "Financiera Horizonte" },
+    { name: "Grupo Constructor Alpha" },
+    /*    { name: "Logística Express" },
+    { name: "Centro Médico Vital" },
+    { name: "Industrias Apex" },
+    { name: "Retail Solutions" },
+    { name: "Banca Privada Elite" }, */
+    { name: "Ignis Nova", logo: "/images/clientes/ignisNova.png" },
 ];
 ---
 
@@ -17,18 +18,34 @@ const clients = [
 
         <div class="carousel-wrapper">
             <div class="carousel-track">
-                <!-- Render double the items to create seamless loop illusion -->
+                {/* Render double the items to create seamless loop illusion */}
                 {
                     clients.map((client) => (
                         <div class="client-logo">
-                            <span class="logo-text">{client}</span>
+                            {client.logo ? (
+                                <img
+                                    src={client.logo}
+                                    alt={client.name}
+                                    class="logo-img"
+                                />
+                            ) : (
+                                <span class="logo-text">{client.name}</span>
+                            )}
                         </div>
                     ))
                 }
                 {
                     clients.map((client) => (
                         <div class="client-logo">
-                            <span class="logo-text">{client}</span>
+                            {client.logo ? (
+                                <img
+                                    src={client.logo}
+                                    alt={client.name}
+                                    class="logo-img"
+                                />
+                            ) : (
+                                <span class="logo-text">{client.name}</span>
+                            )}
                         </div>
                     ))
                 }
@@ -39,7 +56,7 @@ const clients = [
 
 <style>
     .clients {
-        padding: 4rem 0;
+        padding: 3rem 0;
         background: #000;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         overflow: hidden;
@@ -54,10 +71,10 @@ const clients = [
 
     .section-label {
         color: var(--color-text-muted);
-        font-size: 0.875rem;
+        font-size: 1.4rem;
         text-transform: uppercase;
         letter-spacing: 2px;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         font-weight: 600;
     }
 
@@ -78,7 +95,8 @@ const clients = [
         display: flex;
         gap: 4rem;
         width: max-content;
-        animation: scroll 30s linear infinite;
+        animation: scroll 10s linear infinite;
+        align-items: center;
     }
 
     .client-logo {
@@ -89,10 +107,25 @@ const clients = [
         opacity: 0.5;
         transition: opacity 0.3s ease;
         cursor: default;
+        height: 150px;
     }
 
     .client-logo:hover {
         opacity: 1;
+        cursor: pointer;
+    }
+
+    .logo-img {
+        height: 100%;
+        width: auto;
+        max-width: 300px;
+        object-fit: contain;
+        filter: grayscale(100%) brightness(200%);
+        transition: filter 0.3s ease;
+    }
+
+    .client-logo:hover .logo-img {
+        filter: none;
     }
 
     .logo-text {
@@ -100,7 +133,7 @@ const clients = [
         font-weight: 700;
         color: #fff;
         white-space: nowrap;
-        font-family: "Courier New", monospace; /* Tech/Security vibe */
+        font-family: "Courier New", monospace;
     }
 
     @keyframes scroll {

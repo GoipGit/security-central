@@ -1,3 +1,7 @@
+---
+import { MapPin, Mail, Phone } from "lucide-astro";
+---
+
 <section id="contacto" class="contact">
     <div class="container">
         <div class="wrapper">
@@ -16,21 +20,21 @@
 
                 <div class="info-items">
                     <div class="item">
-                        <span class="icon">📍</span>
+                        <MapPin class="icon" />
                         <div class="details">
                             <strong>Oficina Central</strong>
                             <span>Av. Providencia 1234, Santiago, Chile</span>
                         </div>
                     </div>
                     <div class="item">
-                        <span class="icon">📧</span>
+                        <Mail class="icon" />
                         <div class="details">
                             <strong>Email</strong>
                             <span>contacto@securitycentral.cl</span>
                         </div>
                     </div>
                     <div class="item">
-                        <span class="icon">📞</span>
+                        <Phone class="icon" />
                         <div class="details">
                             <strong>Teléfono 24/7</strong>
                             <span>+56 2 2333 4444</span>
@@ -155,7 +159,11 @@
     }
 
     .icon {
-        font-size: 1.5rem;
+        width: 24px;
+        height: 24px;
+        color: var(--color-primary);
+        flex-shrink: 0;
+        margin-top: 4px; /* Align with text */
     }
 
     .details {

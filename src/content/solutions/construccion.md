@@ -1,13 +1,13 @@
 ---
 title: "Construcción"
 description: "Protección de obras y maquinaria. Vigilancia perimetral 24/7 para evitar robos de materiales y control estricto de entrada y salida."
-icon: "x"
+icon: "construction"
 features:
   - "Control de acceso biométrico"
   - "Vigilancia nocturna con drones"
   - "Rondas perimetrales continuas"
-ctaText: "Ver Cámaras Perimetrales"
-ctaLink: "/productos#camaras"
+ctaText: "Solicitar Evaluación"
+ctaLink: "/#contacto"
 isFeatured: false
 ---
 Soluciones robustas para ambientes de alta complejidad y riesgo.

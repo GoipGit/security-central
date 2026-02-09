@@ -1,8 +1,15 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import { Store, HardHat, Building2 } from "lucide-astro";
 
 const solutions = await getCollection("solutions");
 type Solution = CollectionEntry<"solutions">;
+
+const iconMap: Record<string, any> = {
+    retail: Store,
+    construction: HardHat,
+    corporate: Building2,
+};
 ---
 
 <section id="soluciones" class="solutions">
@@ -21,23 +28,34 @@ type Solution = CollectionEntry<"solutions">;
 
         <div class="solutions-grid">
             {
-                solutions.map((solution: Solution) => (
-                    <article
-                        class={`solution-card ${solution.data.isFeatured ? "featured" : ""}`}
-                    >
-                        <div class="icon-wrapper">{solution.data.icon}</div>
-                        <h3>{solution.data.title}</h3>
-                        <p>{solution.data.description}</p>
-                        <ul class="features">
-                            {solution.data.features.map((feature: string) => (
-                                <li>{feature}</li>
-                            ))}
-                        </ul>
-                        <a href={solution.data.ctaLink} class="link-arrow">
-                            {solution.data.ctaText} →
-                        </a>
-                    </article>
-                ))
+                solutions.map((solution: Solution) => {
+                    const Icon = iconMap[solution.data.icon];
+                    return (
+                        <article
+                            class={`solution-card ${solution.data.isFeatured ? "featured" : ""}`}
+                        >
+                            <div class="icon-wrapper">
+                                {Icon ? <Icon /> : solution.data.icon}
+                            </div>
+                            <h3>{solution.data.title}</h3>
+                            <p>{solution.data.description}</p>
+                            <ul class="features">
+                                {solution.data.features.map(
+                                    (feature: string) => (
+                                        <li>{feature}</li>
+                                    ),
+                                )}
+                            </ul>
+                            <a
+                                href={solution.data.ctaLink}
+                                class="link-arrow"
+                                data-astro-prefetch
+                            >
+                                {solution.data.ctaText} →
+                            </a>
+                        </article>
+                    );
+                })
             }
         </div>
 
@@ -47,7 +65,9 @@ type Solution = CollectionEntry<"solutions">;
                 Nuestros expertos realizan un levantamiento gratuito para
                 diseñar la solución perfecta.
             </p>
-            <a href="/#contacto" class="btn-primary">Agendar Visita Técnica</a>
+            <a href="/#contacto" class="btn-primary" data-astro-prefetch
+                >Agendar Visita Técnica</a
+            >
         </div>
     </div>
 </section>

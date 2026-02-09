@@ -1,17 +1,61 @@
 <nav class="navbar">
 	<div class="container">
-		<a href="#" class="brand">
+		<a href="/" class="brand" aria-label="Inicio" data-astro-prefetch>
 			Security<span class="text-gradient">Central</span>
 		</a>
 		<ul class="nav-links">
-			<li><a href="/">Inicio</a></li>
-			<li><a href="/#servicios">Servicios</a></li>
-			<li><a href="/#soluciones">Soluciones</a></li>
-			<li><a href="/productos" class="highlight-link">Productos</a></li>
+			<li>
+				<a
+					href="/"
+					class="nav-link-home"
+					aria-current="page"
+					data-astro-prefetch>Inicio</a
+				>
+			</li>
+			<li><a href="/#servicios" data-astro-prefetch>Servicios</a></li>
+			<li><a href="/#soluciones" data-astro-prefetch>Soluciones</a></li>
+			<li>
+				<a href="/productos" class="highlight-link" data-astro-prefetch
+					>Productos</a
+				>
+			</li>
 		</ul>
-		<a href="#contacto" class="btn-primary">Cotizar Ahora</a>
+		<a href="/#contacto" class="btn-primary" data-astro-prefetch
+			>Cotizar Ahora</a
+		>
 	</div>
 </nav>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		if (sessionStorage.getItem("scrollToTop")) {
+			window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+			sessionStorage.removeItem("scrollToTop");
+		}
+
+		const scrollToTop = (e: Event) => {
+			if (window.location.pathname === "/") {
+				e.preventDefault();
+				window.scrollTo({
+					top: 0,
+					left: 0,
+					behavior: "smooth",
+				});
+				if (window.location.hash) {
+					history.pushState(null, "", window.location.pathname);
+				}
+			} else {
+				sessionStorage.setItem("scrollToTop", "true");
+			}
+		};
+
+		const brandLink = document.querySelector(".brand");
+		const homeLink = document.querySelector(".nav-link-home");
+
+		if (brandLink) brandLink.addEventListener("click", scrollToTop);
+		if (homeLink) homeLink.addEventListener("click", scrollToTop);
+	});
+</script>
 
 <style>
 	.navbar {
