@@ -143,4 +143,26 @@ const clients = [
     .carousel-wrapper:hover .carousel-track {
         animation-play-state: paused;
     }
+
+    @media (max-width: 768px) {
+        .clients {
+            padding: 2rem 0;
+        }
+
+        .carousel-track {
+            gap: 2rem;
+        }
+
+        .client-logo {
+            height: 80px; /* Reduced height */
+        }
+
+        .logo-img {
+            max-width: 150px;
+        }
+
+        .section-label {
+            font-size: 1rem;
+        }
+    }
 </style>
